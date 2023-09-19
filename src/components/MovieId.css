@@ -14,10 +14,10 @@
 } */
 
 .movie-details {
-  
+  position: absolute;
   top: 60px;
-  right: 350px;
-  width: 400px; 
+  
+ 
   background-color: #b66d6d;
   border: 1px solid #ccc;
   padding: 20px;

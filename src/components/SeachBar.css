@@ -1,50 +1,143 @@
 
 
-.topnav input[type=text] {
+/* .topnav input[type=text] {
 
-    padding: 6px;
+  padding: 60px;
 
-    margin-top: 0px;
+  margin-top: 0px;
 
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 
-    font-size: 17px;
+  font-size: 170px;
 
-    border: none;
+  border: none;
 
- 
 
-   
-
-  }
-
-  .topnav{
-
-    text-align: center;
-    margin-top: 0px;
-
-    background-color:rgb(108, 108, 237);
-
-    
-
-  }
 
  
+
+}
+
+.topnav{
+  text-align: center;
+  margin-top: 0px;
+  background-color:blue;
+}
+
+
 
 .topnav input[type = submit]{
 
-    padding: 6px;
+  padding: 20px;
 
-    margin-top: 0px;
+  margin-top: 0px;
 
-    margin-bottom: 4px;
+  margin-bottom: 40px;
 
-    font-size: 17px;
+  font-size: 17px;
 
-    border: none;
+  border: none;
 
-    margin-left : 8px;
+  margin-left : 8px;
 
+
+
+} */
+.search-container {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: purple;
+  
+
+}
+
+.search-icon {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex-grow: 1;
+  margin: 0 auto; /* Center the input horizontally */
+}
+
+.search-button {
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+.release-title{
+  font-weight: bold;
+  font-size: large;
+  
+  
+}
+.release-date{
+  margin-bottom: 100px;
+}
+.list-item{
+  margin-bottom:  20px; ;
+}
+
+.grid-container{
+  display: flex;
  
+}
+.details-column{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.image-column{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.details-movie-details {
+  flex: 1;
+ /* Optional: Set a background color for the right half */
+  padding: 20px; /* Optional: Add padding */
+}
+.release-button {
+  background-color:aqua;
+  color: #000;
+  padding: 6px 6px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.release-button:hover{
+  background-color: #0056b3;
+}
+.pagination{
 
-  }
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.pagination-button{
+  white-space: 10px;
+  font-size: 10px;
+  padding: 5px 4px;
+  border-radius: 4px;
+  gap: 10px;
+}
+
+
+
+
+/* Optional: You can add styles for spacing and appearance as needed */

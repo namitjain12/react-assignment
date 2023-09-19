@@ -1,48 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom"; // Import useLocation to access query parameters
 import axios from "axios";
+import "../App.css";
+import "./MovieId.css"
 
-function MovieDetails() {
+function MovieDetails({ movieId }) {
   const [movieData, setMovieData] = useState(null);
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const movieId = queryParams.get("id");
 
   useEffect(() => {
-    // API URL with the dynamically obtained movieId
     const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=c340ce9b56b005a778ba3d8b6eeda525&language=en-US`;
 
-    // Fetch movie data from the API
     axios
       .get(apiUrl)
       .then((response) => {
-        // Extract relevant data from the API response
-        const { title, overview, release_date, vote_average } = response.data;
+        const {
+          title,
+          overview,
+          release_date,
+          vote_average,
+          poster_path,
+        } = response.data;
 
-        // Create an object to hold movie details
         const movieDetails = {
           title,
           overview,
           releaseDate: release_date,
           voteAverage: vote_average,
+          posterPath: poster_path, 
         };
 
-        // Set the movieData state
         setMovieData(movieDetails);
       })
       .catch((error) => {
         console.error("Error fetching movie data:", error);
       });
-  }, [movieId]); // Include movieId in the dependency array to fetch data when it changes
+  }, [movieId]);
 
   return (
-    <div>
+    <div className="movie-details">
       {movieData ? (
         <div>
-          <h1>Title: {movieData.title}</h1>
-          <p>Overview: {movieData.overview}</p>
-          <p>Release Date: {movieData.releaseDate}</p>
-          <p>Vote Average: {movieData.voteAverage}</p>
+          <img
+            src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movieData.posterPath}`}
+            alt={movieData.title}
+            
+          />
+          <h1 className="movie-title">{movieData.title}</h1>
+          <p className="movie-overview">{movieData.overview}</p>
+          <p className="movie-release-date">
+            Release Date: {movieData.releaseDate}
+          </p>
+          <p className="movie-vote-average">
+            Vote Average: {movieData.voteAverage}
+          </p>
         </div>
       ) : (
         <p>Loading movie data...</p>

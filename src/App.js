@@ -1,27 +1,67 @@
-import {useState} from "react";
+import { useState } from "react";
 import './App.css';
-import {SearchBar} from "./components/SeachBar";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { SearchResultsList } from "./components/SearchResultsList";
+
+import { Register} from "./components/Register";
+import { Login } from "./components/Login";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Home } from "./components/Home";
+import { Main } from "./components/Main";
+import { InvalidURL } from "./components/InvalidUrl";
 
 function App() {
-  const [results,setResults]= useState([]);
-  
+
+  const isAuthenticated =localStorage.getItem("user");
+
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<SearchBar setResults={setResults}/>} />
-      <Route path="/movie-data" element={<SearchResultsList results={results}/>} />
-      {/* Define other routes here */}
-    </Routes>
-  </BrowserRouter>
-    
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Register />} />
+        <Route exact path="/home" 
+        element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
+        <Route exact path="/login" element={ <Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route
+          exact
+          path="/main"
+          element={isAuthenticated ? <Main /> : <Navigate to="/login" />}
+        />
+        <Route path="*" element={<InvalidURL />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
-{/* <div className="App">
-      <div className="search-bar-container"></div>
-    
-    < results={results}/>
-    </div> */}
+
+// import { useState } from "react";
+// import './App.css';
+// import { SearchBar } from "./components/SeachBar";
+// import { SearchResultsList } from "./components/SearchResultsList";
+// import { Register} from "./components/Register";
+// import { Login } from "./components/Login";
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import {Home} from "./components/Home";
+// import {Main} from "./components/Main";
+// function App() {
+//   const [results, setResults] = useState([]);
+ 
+//   return (
+//     <Router>
+      
+//         <Routes>
+//           <Route exact path="/" element={<Register/>}/>
+//            <Route exact path="/home" element={<Home/>}/> 
+//           <Route exact path="/login" element={<Login/>}/>
+//           <Route exact path="/register" element={<Register/>}/>
+//           <Route exact path="/main" element={<Main/>}/>
+        
+          
+      
+//         </Routes>      
+//     </Router>
+//      /* <SearchBar setResults={setResults} />
+//       <SearchResultsList results={results} />  */
+//   );
+// }
+
+// export default App;
