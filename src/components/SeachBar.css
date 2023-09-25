@@ -49,6 +49,7 @@
   justify-content: center;
   text-align: center;
   background-color: purple;
+  height: 50px;
   
 
 }
@@ -63,7 +64,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   flex-grow: 1;
-  margin: 0 auto; /* Center the input horizontally */
+  margin: 0 auto; 
 }
 
 .search-button {
