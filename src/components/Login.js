@@ -22,7 +22,6 @@ export function Login({updateAuth}) {
     console.log(isAuth);
     if (isAuth?.password ===  input.password) {
       localStorage.setItem("isAuth", JSON.stringify(isAuth));
-
       updateAuth(true);
       
       navigate("/home");
