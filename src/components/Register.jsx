@@ -1,55 +1,13 @@
 
-// import {useState } from "react";
-// import "./register.css";
-// import { useNavigate } from "react-router-dom";
-// export  function Register() {
-//   const navigate =useNavigate();
-//    const [input,setInput]= useState({
-//     name: "",
-//     email:"",
-//     password:"",
-//     confirmpassword:""
-//    }) ;
-//    const inputs=JSON.parse(localStorage.getItem("user")|| "[]")
-//       // to store value in local storage
-
-//       const handleSubmit = (e) => {
-//         e.preventDefault();
-      
-//         // Basic validation
-//         if (!input.name || !input.email || !input.password || !input.confirmpassword) {
-//           alert('Please fill in all fields');
-//           return;
-//         }
-      
-//         // Additional validation for email format
-//         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-//         if (!emailPattern.test(input.email)) {
-//           alert('Invalid email address');
-//           return;
-//         }
-      
-//         // Check if password and confirm password match
-//         if (input.password !== input.confirmpassword) {
-//           alert('Password and confirm password do not match');
-//           return;
-//         }
-//         inputs.push(input)
-      
-//         // Now, you can proceed with form submission
-//         // localStorage.setItem("user", JSON.stringify(input));
-//         localStorage.setItem("user", JSON.stringify(inputs));
-//         navigate("/login");
-//       };
-      
-//       const handlelogin=(e)=>{
-//         e.preventDefault();
-//         navigate("/login")
-//       }
   
 import { useState, useEffect } from "react";
 import "./register.css";
 import { useNavigate } from "react-router-dom";
+import { mail } from 'ionicons/icons';
+import { lockClosed } from 'ionicons/icons';
+import { FaMailBulk} from "react-icons/fa";
+import {FaLock} from "react-icons/fa";
+
 
 export function Register() {
   const navigate = useNavigate();
@@ -89,83 +47,138 @@ export function Register() {
       return;
     }
 
-    // Add the new input to the existing array
+   
+    const loggeduser = JSON.parse(localStorage.getItem("user"));
+    if(loggeduser.find((obj) => obj.email === input.email))
+    alert("email already exist");
+  else{
     const updatedInputs = [...savedInputs, input];
-
-    // Now, you can proceed with form submission
     localStorage.setItem("user", JSON.stringify(updatedInputs));
     navigate("/login");
+  }
   };
 
-  const handlelogin = (e) => {
-    e.preventDefault();
-    navigate("/login");
-  };
+  // const handlelogin = (e) => {
+  //   e.preventDefault();
+  //   navigate("/login");
+  // };
 
   return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">Movie Tracker</h3>
-          <span className="loginDesc">
-            Find any Movie
+    <div className="body1">
+      <div className="wrapper">
+      <div className="form-box login">
+      <h2 className="loginLogo">MovieTracker</h2>  
+    <form  onSubmit={handleSubmit}>                      
+          
+         <div className="input-box">
+          <span className="icon">
+          <FaMailBulk /> 
+          <ion-icon name={mail}></ion-icon>
+         
           </span>
-        </div>
-        <div className="loginRight">
-          <form className="loginBox" onSubmit={handleSubmit}>
-          <input 
-            name="name"
-            value={input.name}
-            onChange={(e)=>
-              setInput({
-                ...input,
-                [e.target.name]:e.target.value,
-              })
-            }
-            type="text" placeholder="Username" className="loginInput"/>
-           <input
-            name="email"
-            value={input.email}
-            onChange={(e)=>
-              setInput({
-                ...input,
-                [e.target.name]:e.target.value,
-              })
-            }
-            placeholder="Email" className="loginInput" />
-            <input
-            name="password"
-            type="password"
-            value={input.password}
-            onChange={(e)=>
-              setInput({
-                ...input,
-                [e.target.name]:e.target.value,
-              })
-            }
-             placeholder="Password" className="loginInput" />
-             <input
-            name="confirmpassword"
-            type="password"
-            value={input.confirmpassword}
-            onChange={(e)=>
-              setInput({
-                ...input,
-                [e.target.name]:e.target.value,
-              })
-            }
-             placeholder="Confirm Password" className="loginInput" /> 
-            <button className="loginButton" type="submit">
-              Sign Up
+          
+            <input 
+              name="name"
+              type="name"
+              required
+              value={input.name}
+              onChange={(e) =>
+                setInput({
+                  ...input,
+                  [e.target.name]: e.target.value,
+                })
+              }             
+              
+            />
+            <label>User-Name</label>
+            </div>
+
+            <div className="input-box">
+          <span className="icon">
+          <FaMailBulk /> 
+          <ion-icon name={mail}></ion-icon>
+         
+          </span>
+          
+            <input 
+              name="email"
+              type="email"
+              required
+              value={input.email}
+              onChange={(e) =>
+                setInput({
+                  ...input,
+                  [e.target.name]: e.target.value,
+                })
+              }             
+              
+            />
+            <label>Email</label>
+            </div>
+
+            <div className="input-box">
+          <span className="icon">
+          <FaMailBulk /> 
+          <ion-icon name={mail}></ion-icon>
+         
+          </span>
+          
+            <input 
+              name="password"
+              type="password"
+              required
+              value={input.password}
+              onChange={(e) =>
+                setInput({
+                  ...input,
+                  [e.target.name]: e.target.value,
+                })
+              }             
+              
+            />
+            <label>Password</label>
+            </div>
+
+
+            <div className="input-box">
+            <span className="icon">
+            <FaLock /> 
+            </span>            
+            <input 
+              name="confirmpassword"
+              required
+              type="password"
+              value={input.confirmpassword}
+              onChange={(e) =>
+                setInput({
+                  ...input,
+                  [e.target.name]: e.target.value,
+                })
+              }        
+              
+            />
+            <label>ConfirmPassword</label>
+            </div>
+            <div className="remember-forgot">
+              <label> <input type="checkbox"/>Remember Me</label>
+              <a href="#" >Forget password?</a>
+            </div>
+            <button type="submit" className="btn">
+              SignUp
             </button>
-            
-          </form>
-          <button className="loginRegisterButton"onClick={handlelogin}>Log into Account</button>
-        </div>
-      </div>
+            <div className="login-register">
+               <p> Already have an account?<a href="/login" 
+               className="register-link"> Login</a>
+               </p>
+            </div>
+          
+        
+      
+    </form>
+    </div>
+    </div>
     </div>
   );
- 
 }
 // return (
   //      <form onSubmit={handleSubmit}>

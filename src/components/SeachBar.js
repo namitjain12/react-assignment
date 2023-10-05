@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 
 
-export const SearchBar = ({ setResults }) => {
+export const SearchBar = ({ setResults,updateAuth}) => {
   const [input, setInput] = useState('');
   const navigate =useNavigate();
   const fetchData = () => {
@@ -21,15 +21,22 @@ export const SearchBar = ({ setResults }) => {
         console.error('Error fetching data:', error);
       });
   };
-  const handleSearchClick=()=>{
-//  localStorage.clear();
- navigate("/register")
+  const handleLogout=()=>{
+    updateAuth(false)
+    console.log(updateAuth)
+    localStorage.setItem("loggedin", false);
+    localStorage.removeItem("isAuth");
+    navigate("/register")
+
   }
 
   const handleChange = (value) => {
     setInput(value);
      fetchData(value);
   };
+  const handleProfile =()=>{
+    navigate("/profile")
+  }
 
   // const handleSearchClick = () => {
   //   fetchData(input); 
@@ -44,7 +51,9 @@ export const SearchBar = ({ setResults }) => {
         onChange={(e) => handleChange(e.target.value)}
       />
       
-      <button onClick={handleSearchClick}>Logout</button> 
+      <button className="btnprofile" onClick={handleProfile}>Profile</button> 
+      <button className="btnprofile" onClick={handleProfile}>PassUpdate</button> 
+      <button className="btnlogout"onClick={handleLogout}>Logout</button> 
     </div>
   );
 };
